@@ -1,6 +1,6 @@
 		var mqtt;
 		var reconnectTimeout = 2000;
-		var host="127.0.0.1"; //change this
+		var host="192.168.2.152"; //change this
 		//var host="iot.eclipse.org"
 		//var port=80
 		var port=9001;
