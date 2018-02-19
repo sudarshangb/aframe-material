@@ -9,7 +9,7 @@
     "test":"echo\"Error:no test specified\" && exit 1",
     "watch": "cross-env webpack --progress --colors --watch",
     "build": "cross-env webpack --progress --colors",
-    "start": "cross-env NODE_ENV=dev webpack-dev-server --progress --colors --hot -d --host 0.0.0.0",
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --progress --colors --hot -d  --host 192.168.2.152 --disable-host-check --port 3333",
     "dist": "npm run dist:max && npm run dist:min",
     "dist:max": "cross-env npm run build",
     "dist:min": "cross-env NODE_ENV=production npm run build"
