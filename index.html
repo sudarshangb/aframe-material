@@ -8,6 +8,56 @@
     <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
     <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
     <script src="dist/aframe-material.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"/script> <!-- TEST -->
+	
+	
+    <script type = "text/javascript" language = "javascript">
+		var mqtt;
+		var reconnectTimeout = 2000;
+		var host="127.0.0.1"; //change this
+		//var host="iot.eclipse.org"
+		//var port=80
+		var port=9001;
+		
+		function onFailure(message) {
+			console.log("Connection Attempt to Host "+host+"Failed");
+			setTimeout(MQTTconnect, reconnectTimeout);
+        	}
+		function onMessageArrived(msg){
+			out_msg="Message received "+msg.payloadString+"<br>";
+			out_msg=out_msg+"Message received Topic "+msg.destinationName;
+			console.log(out_msg);
+
+		}
+		
+	 	function onConnect() {
+	  // Once a connection has been made, make a subscription and send a message.
+	
+		console.log("Connected ");
+		mqtt.subscribe("sensor1");
+		message = new Paho.MQTT.Message("Hello World");
+		message.destinationName = "sensor1";
+		mqtt.send(message);
+	  }
+	  function MQTTconnect() {
+		console.log("connecting to "+ host +" "+ port);
+		mqtt = new Paho.MQTT.Client(host,port,"clientjs");
+		//document.write("connecting to "+ host);
+		var options = {
+			timeout: 3,
+			onSuccess: onConnect,
+			onFailure: onFailure,
+			 };
+		mqtt.onMessageArrived = onMessageArrived
+		
+		mqtt.connect(options); //connect
+		}
+	 
+    </script>
+	
+	
+	
+	
     <script type="text/javascript">
       AFRAME.ASSETS_PATH = "./assets";
     </script>
@@ -40,7 +90,7 @@
       <!-- END FORM -->
 
       <!-- BEGIN TOAST -->
-      <a-toast message="This is a toast" action="Got it"></a-toast>
+      <a-toast message="Yo!VR Home!" action="Got it"></a-toast>
       <!-- END TOAST -->
 
       <!-- BEGIN ENVIRONEMENT -->
@@ -48,13 +98,16 @@
       <!-- END ENVIRONEMENT -->
     </a-scene>
     <script type="text/javascript">
+	  
       let button = document.querySelector('a-button');
       let toast = document.querySelector('a-toast');
       toast.addEventListener('actionclick', ()=>{
         toast.hide();
       });
-      button.addEventListener('click', ()=> {
+      button.addEventListener('click', ()=> 
+	  {
         toast.show();
+	MQTTconnect();
       });
     </script>
   </body>
