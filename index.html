@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>aframe-material😲😆😛</title>
+    <title>aframe-materialðŸ˜²ðŸ˜†ðŸ˜›</title>
     <meta name="description" content="Aframe-Material">
     <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
     <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
@@ -17,7 +17,9 @@
   <body>
     <a-scene>
       <a-entity laser-controls="hand: right"></a-entity>
-      
+      <a-assets>
+        <img id="city" crossorigin="anonymous" src="https://ucarecdn.com/80c86187-e99a-4c33-b011-51acd8dc682a/">
+      </a-assets>
 	<!-- camera and cursor -->
       <a-entity> <a-camera look-controls-enabled wasd-controls-enabled mouse-cursor>
 	   <a-entity cursor="fuse: true; fuseTimeout: 500"
@@ -60,8 +62,8 @@
       <a-toast message="Yo!VR Home!" action="Got it"></a-toast>
       <!-- END TOAST -->
 
-       <!-- BEGIN ENVIRONEMENT -->
-      <a-gradient-sky material="shader: gradient; topColor: 255 0 0; bottomColor: 0 121 255;"></a-gradient-sky>
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city"></a-sky>
       <!-- END ENVIRONEMENT -->
     </a-scene>
     <script type="text/javascript">
